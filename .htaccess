@@ -1,0 +1,30 @@
+## Default .htaccess file
+<IfModule pagespeed_module>
+	#ModPagespeed off
+ 
+	# CoreFilters
+	#ModPagespeedDisableFilters add_head
+	#ModPagespeedDisableFilters combine_css
+	#ModPagespeedDisableFilters combine_javascript
+	#ModPagespeedDisableFilters convert_meta_tags
+	#ModPagespeedDisableFilters extend_cache
+	#ModPagespeedDisableFilters fallback_rewrite_css_urls
+	#ModPagespeedDisableFilters flatten_css_imports
+	#ModPagespeedDisableFilters inline_css
+	#ModPagespeedDisableFilters inline_import_to_link
+	#ModPagespeedDisableFilters inline_javascript
+	#ModPagespeedDisableFilters rewrite_css
+	#ModPagespeedDisableFilters rewrite_images
+	#ModPagespeedDisableFilters rewrite_javascript
+	#ModPagespeedDisableFilters rewrite_style_attributes_with_url
+</IfModule>
+
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteCond %{HTTPS} !=on
+	RewriteCond %{HTTP_HOST} !^www\. [NC]
+	RewriteCond %{SERVER_ADDR} !=127.0.0.1
+	RewriteCond %{SERVER_ADDR} !=::1
+	#RewriteRule ^ %{ENV:PROTO}://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+	RewriteRule ^ http://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+</IfModule>
